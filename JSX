@@ -1,0 +1,90 @@
+import React, { useState } from 'react'
+import './cart.css'
+import react from './images/react.png'
+import js from './images/javascript.png'
+import css from './images/CSS-new-features-cover-800x593.png'
+import html from './images/html5-logo-for-web-development.jpg'
+
+const Cart = () => {
+
+    const items =[{pic:react,brand:"React Course",price:"100rs"},{pic:html,brand:"Html Course",price:"150rs"},{pic:js,brand:"JS Course",price:"200rs"},{pic:css,brand:"CSS Course",price:"300rs"}
+                 ]
+    const [cart,setCart] = useState([]);
+    console.log(cart)
+    const addCart=(item)=>{
+        let help = [...cart,[item]] ;
+        setCart(help);
+       console.log('now cart',cart)
+
+    }
+
+    const checkout=()=>{alert('Thanks For Your Purchase')}
+
+  return (
+    <>
+     <div className="nav"> <h2> My Udemy - Online Courses</h2></div>
+     <div className="container">
+
+      
+          {items.map((item)=>{
+
+               return(
+                     <>
+
+                         <div className="card one">
+                           <img src={item.pic} alt="" className='img-1' />
+                          <h4 className="brand">{item.brand}</h4>
+                           <p className="price">{item.price}</p>
+                        <button className="addToCart"  onClick={()=>{
+                 
+                           
+                            addCart(item);
+                           
+                            }}   >Add To Cart</button>
+                          </div>
+                     </>
+
+
+
+                     )
+
+           
+
+
+
+          }) }
+         
+
+      
+    
+     
+   
+
+
+     </div>
+     <hr />
+      <div className="shopping">
+        <h1>Shopping Carts</h1>
+        <ul>
+           {cart.length>0?cart.map((i)=>{
+            console.log('i',i[0].price)
+            
+               return(<>
+                       <li>{i[0].brand} {i[0].price}</li>
+               
+               
+                      </> )
+           }
+           ): <li>no items found</li> }
+
+
+
+           </ul>
+           <button className="checkout" onClick={checkout}>Checkout</button>
+      </div>
+
+    </>
+  )
+}
+
+export default Cart;
